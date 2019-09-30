@@ -11,7 +11,7 @@ $action = $_GET['action'];
 
 switch ($action) {
 	case 'house_data_init':
-		sys_msg_json(0, $GLOBALS['house_arr']);
+		response_json_msg(0, $GLOBALS['house_arr']);
 		break;
 	case 'get_combination_data':
 
@@ -23,7 +23,7 @@ switch ($action) {
 			if ($_SESSION['IP'] == $this_ip) {
 				$time_diff = time() - $_SESSION['TIME'];
 				if ($time_diff < 60) {
-					// sys_msg_json(1, '','限制每次请求间隔1分钟，请等待'.(60-$time_diff).'秒');
+					// response_json_msg(1, '','限制每次请求间隔1分钟，请等待'.(60-$time_diff).'秒');
 					// echo '限制每次请求间隔1分钟，请等待'.(60-$time_diff).'秒';
 				}
 			}
@@ -113,16 +113,16 @@ switch ($action) {
 			'photo_data' 			=> $photo_data,
 			'mission_data' 			=> $mission_data,
 		);
-		// sys_msg_json(0, $post_data);
+		// response_json_msg(0, $post_data);
 
 		$res = calculation_combination($post_data);
 
 		if (is_array($res)) {
 			$_SESSION['IP'] = get_ip();
 			$_SESSION['TIME'] = time();
-			sys_msg_json(0, $res);
+			response_json_msg(0, $res);
 		}else{
-			sys_msg_json(1, '', $res);
+			response_json_msg(1, '', $res);
 		}
 		break;
 	default:
@@ -496,7 +496,7 @@ function calculation_combination($post_data){
 
 
 
-function sys_msg_json($error, $data, $msg = ''){
+function response_json_msg($error, $data, $msg = ''){
 	$arr = array(
 		'error' => $error,
 		'data' => $data,
