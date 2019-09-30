@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>家国梦</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<style type="text/css">
+	body{font-size: 14px;}
+	body a{text-decoration:none;}
+
+	.quality_blue {background: #64c6ff;}
+	.quality_purple {background: #ea77ff;}
+	.quality_orange {background: #ff9900;}
+
+	table{float: left; margin: 10px;}
+	table td:first-child {min-width: 80px; text-align: right; padding-right: 10px;}
+	table td:last-child {min-width: 80px; text-align: left; padding-left: 10px;}
+	table td.city_mission_td{width: 100px;}
+	table td.city_mission_td input{width: 80px;}
+	table td label {padding-right: 20px;}
+	table td label.active{background: #fff;}
+
+	.addition_data_table td:last-child {width: 80px;}
+	.addition_data_table td:last-child input{width: 60px;}
+
+	a.sub_btn { display: block; height: 30px; padding: 0 20px; overflow: hidden; line-height: 30px; background: #0F8DF4; float: left; color: #fff; font-weight: bold; 	}
+</style>
+</head>
+<body>
+	<form method="POST" id="data_form">
+		<div>
+			<table id="house_data_table_residence" cellpadding="1" cellspacing="1" border="1"></table>
+			<table id="house_data_table_business" cellpadding="1" cellspacing="1" border="1"></table>
+			<table id="house_data_table_industry" cellpadding="1" cellspacing="1" border="1"></table>
+		</div>
+		<div style="clear: both;"></div>
+		<div>
+			<table class="addition_data_table" cellpadding="1" cellspacing="1" border="1">
+				<tr><td colspan="2" style="text-align: center;">政策加成</td></tr>
+				<tr><td>全部建筑收入加成</td><td><input type="text" name="policy_data_all">%</td></tr>
+				<tr><td>住宅建筑收入加成</td><td><input type="text" name="policy_data_res">%</td></tr>
+				<tr><td>商业建筑收入加成</td><td><input type="text" name="policy_data_bus">%</td></tr>
+				<tr><td>工业建筑收入加成</td><td><input type="text" name="policy_data_ind">%</td></tr>
+				<tr><td>在线-全部建筑收入加成</td><td><input type="text" name="policy_data_all_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-住宅建筑收入加成</td><td><input type="text" name="policy_data_res_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-商业建筑收入加成</td><td><input type="text" name="policy_data_bus_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-工业建筑收入加成</td><td><input type="text" name="policy_data_ind_ol">%</td></tr>
+			</table>
+			<table class="addition_data_table" cellpadding="1" cellspacing="1" border="1">
+				<tr><td colspan="2" style="text-align: center;">相片加成</td></tr>
+				<tr><td>全部建筑收入加成</td><td><input type="text" name="photo_data_all">%</td></tr>
+				<tr><td>住宅建筑收入加成</td><td><input type="text" name="photo_data_res">%</td></tr>
+				<tr><td>商业建筑收入加成</td><td><input type="text" name="photo_data_bus">%</td></tr>
+				<tr><td>工业建筑收入加成</td><td><input type="text" name="photo_data_ind">%</td></tr>
+				<tr><td>在线-全部建筑收入加成</td><td><input type="text" name="photo_data_all_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-住宅建筑收入加成</td><td><input type="text" name="photo_data_res_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-商业建筑收入加成</td><td><input type="text" name="photo_data_bus_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-工业建筑收入加成</td><td><input type="text" name="photo_data_ind_ol">%</td></tr>
+			</table>
+			<table class="addition_data_table" cellpadding="1" cellspacing="1" border="1">
+				<tr><td colspan="2" style="text-align: center;">城市任务加成</td></tr>
+				<tr><td>全部建筑收入加成</td><td><input type="text" name="mission_data_all">%</td></tr>
+				<tr><td>住宅建筑收入加成</td><td><input type="text" name="mission_data_res">%</td></tr>
+				<tr><td>商业建筑收入加成</td><td><input type="text" name="mission_data_bus">%</td></tr>
+				<tr><td>工业建筑收入加成</td><td><input type="text" name="mission_data_ind">%</td></tr>
+				<tr><td>在线-全部建筑收入加成</td><td><input type="text" name="mission_data_all_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-住宅建筑收入加成</td><td><input type="text" name="mission_data_res_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-商业建筑收入加成</td><td><input type="text" name="mission_data_bus_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-工业建筑收入加成</td><td><input type="text" name="mission_data_ind_ol">%</td></tr>
+			</table>
+		</div>
+	</form>
+	<div style="clear: both;"></div>
+	<div style="margin: 10px; width: 150px; float: left;">
+		<a href="javascript:;" class="sub_btn" onclick="submit_form(this)">计算最优组合</a>
+	</div>
+	<div style="width: auto; float: left;" class="result">
+		<p>等待计算......</p>
+	</div>
+	<div style="color: red; clear: left;">
+		<!-- <p>鉴于服务器CPU性能原因，限制每次请求间隔1分钟，请见谅</p> -->
+		<p>推荐将效果差或用处不大的建筑等级设置为0，所有建筑全部计算的数据量是1728000，多选一个建筑就是指数级的计算增长</p>
+		<p>以下建筑可选，但是不计算收益：小型公寓（供货）, 复兴公馆（离线、供货）<!-- , 花园洋房（商贸中心、供货）, 加油站（人民石油、离线）, 商贸中心（花园洋房、供货）, 人民石油（加油站、离线） --></p>
+	</div>
+	<div style="clear: both;"></div>
+	<div>
+		<table cellpadding="1" cellspacing="1" border="1" style="font-size: 10px;" id="max_comb_table">
+			<thead>
+				<tr>
+					<td colspan="2">同等级最优组合：<span class="final_multiple"></span></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+			</tbody>
+		</table>
+		<table cellpadding="1" cellspacing="1" border="1" style="font-size: 10px;" id="sec_comb_table">
+			<thead>
+				<tr>
+					<td colspan="2">同等级次优组合：<span class="final_multiple"></span></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+			</tbody>
+		</table>
+		<table cellpadding="1" cellspacing="1" border="1" style="font-size: 10px;" id="max_ind_comb_table">
+			<thead>
+				<tr>
+					<td colspan="2">不同级单体最大加成-工业：<span class="final_multiple"></span></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+			</tbody>
+		</table>
+		<table cellpadding="1" cellspacing="1" border="1" style="font-size: 10px;" id="max_bus_comb_table">
+			<thead>
+				<tr>
+					<td colspan="2">不同级单体最大加成-商业：<span class="final_multiple"></span></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+			</tbody>
+		</table>
+		<table cellpadding="1" cellspacing="1" border="1" style="font-size: 10px;" id="max_res_comb_table">
+			<thead>
+				<tr>
+					<td colspan="2">不同级单体最大加成-住宅：<span class="final_multiple"></span></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+			</tbody>
+		</table>
+	</div>
+	<div style="clear: both;"></div>
+	<div>
+		备注：<br/>
+		* 公式来源：<a href="https://bbs.nga.cn/read.php?tid=18675554" target="_blank">https://bbs.nga.cn/read.php?tid=18675554</a><br/>
+		* 数据来源：<a href="https://bbs.nga.cn/read.php?tid=18677204" target="_blank">https://bbs.nga.cn/read.php?tid=18677204</a><br/>
+		* 特殊收益调整：<br>
+		<table cellpadding="0" cellspacing="0" id="special_default_value"></table>
+	</div>
+
+
+<script type="text/javascript">
+
+
+// 页面加载完毕后，初始化建筑列表
+$(document).ready(function(){
+
+	init_data();
+});
+
+var jump_house = new Array();
+
+function init_data(){
+
+	var time = new Date().getTime();
+	$.ajax({
+		type: "GET",
+		url: "./jiaguomeng.php?action=house_data_init&t="+time,
+		dataType: "json",
+		success: function(json){
+
+			$.each(json.data.level_0_setting, function(index, value){
+				// jump_house.push(value);
+			});
+
+			var output = '';
+			output += '<tr><td colspan="3" style="text-align: center;">住宅</td><tr>';
+			output += '<tr><td style="text-align: center;">名称</td><td style="text-align: center;">星级</td><td style="text-align: center;">城市任务加成</td><tr>';
+			$.each(json.data.residence, function(index, value){
+				output += '<tr class="'+value.quality+'"><td>'+value.name+'</td><td>'+get_house_star(value.name)+'</td><td class="city_mission_td"><input type="text" name="mission['+value.name+']">%</td><tr>';
+			});
+			$('#house_data_table_residence').html(output);
+
+			var output = '';
+			output += '<tr><td colspan="3" style="text-align: center;">商业</td><tr>';
+			output += '<tr><td style="text-align: center;">名称</td><td style="text-align: center;">星级</td><td style="text-align: center;">城市任务加成</td><tr>';
+			$.each(json.data.business, function(index, value){
+				output += '<tr class="'+value.quality+'"><td>'+value.name+'</td><td>'+get_house_star(value.name)+'</td><td class="city_mission_td"><input type="text" name="mission['+value.name+']">%</td><tr>';
+			});
+			$('#house_data_table_business').html(output);
+
+			var output = '';
+			output += '<tr><td colspan="3" style="text-align: center;">工业</td><tr>';
+			output += '<tr><td style="text-align: center;">名称</td><td style="text-align: center;">星级</td><td style="text-align: center;">城市任务加成</td><tr>';
+			$.each(json.data.industry, function(index, value){
+				output += '<tr class="'+value.quality+'"><td>'+value.name+'</td><td>'+get_house_star(value.name)+'</td><td class="city_mission_td"><input type="text" name="mission['+value.name+']">%</td><tr>';
+			});
+			$('#house_data_table_industry').html(output);
+
+
+			var output = '';
+			$.each(json.data.special, function(index, value){
+				output += '<tr><td>'+index+'</td><td>'+value+'</td></tr>';
+			});
+			$('#special_default_value').html(output);
+
+			// 星级切换事件
+			house_star_bind_event();
+
+			// 加成数据初始化
+			policy_photo_mission_init();
+
+			// 组合初始化
+			comb_result_show();
+		},
+		error : function (){
+			alert('数据初始失败');
+		}
+	});
+
+
+}
+
+function get_house_star(name){
+	var output = '';
+	var house_star = localStorage.getItem(name);
+
+	if (jump_house.indexOf(name) > -1) {
+		house_star = 0;
+	}else if (!house_star) {
+		localStorage.setItem(name, 0);
+		house_star = 0;
+	}
+
+	var output =
+		'<label '+((house_star == 0) ? 'class="active"' : '')+'><input type="radio" class="house_star" name="'+name+'" value="0" '+((house_star == 0) ? 'checked="checked"' : '') +' >0</label>'+
+		'<label '+((house_star == 1) ? 'class="active"' : '')+'><input type="radio" class="house_star" name="'+name+'" value="1" '+((house_star == 1) ? 'checked="checked"' : '') +' >1</label>'+
+		'<label '+((house_star == 2) ? 'class="active"' : '')+'><input type="radio" class="house_star" name="'+name+'" value="2" '+((house_star == 2) ? 'checked="checked"' : '') +' >2</label>'+
+		'<label '+((house_star == 3) ? 'class="active"' : '')+'><input type="radio" class="house_star" name="'+name+'" value="3" '+((house_star == 3) ? 'checked="checked"' : '') +' >3</label>'+
+		'<label '+((house_star == 4) ? 'class="active"' : '')+'><input type="radio" class="house_star" name="'+name+'" value="4" '+((house_star == 4) ? 'checked="checked"' : '') +' >4</label>'+
+		'<label '+((house_star == 5) ? 'class="active"' : '')+'><input type="radio" class="house_star" name="'+name+'" value="5" '+((house_star == 5) ? 'checked="checked"' : '') +' >5</label>';
+	return output;
+}
+function house_star_bind_event(){
+	$('.house_star').click(function(){
+		var house_name = $(this).attr('name');
+		var house_star = $(this).val();
+
+		if (jump_house.indexOf(house_name) > -1) {
+			// $("input[name='"+house_name+"']").attr('checked','true');
+			$("input[name='"+house_name+"']").get(0).checked=true;
+		}else{
+			localStorage.setItem(house_name, house_star);
+
+			$(this).parent().parent().children().removeClass('active');
+			$(this).parent().addClass('active');
+		}
+	});
+}
+function policy_photo_mission_init(){
+	// 读取分类建筑的加成数据
+	$('.addition_data_table input').each(function(index, value){
+		var addition_name = $(this).attr('name');
+		var addition_value = localStorage.getItem(addition_name);
+
+		if (!addition_value) {
+			localStorage.setItem(addition_name, 0);
+			$(this).val(0);
+		}else{
+			$(this).val(addition_value);
+		}
+	})
+	// 修改后保存
+	$('.addition_data_table input').change(function(){
+		var addition_name = $(this).attr('name');
+		var addition_value = $(this).val();
+
+		localStorage.setItem(addition_name, addition_value);
+	});
+
+
+	// 读取特定建筑的加成数据
+	$('.city_mission_td input').each(function(index, value){
+		var addition_name = $(this).attr('name');
+		var addition_value = localStorage.getItem(addition_name);
+
+		if (!addition_value) {
+			localStorage.setItem(addition_name, 0);
+			$(this).val(0);
+		}else{
+			$(this).val(addition_value);
+		}
+	})
+	// 修改后保存
+	$('.city_mission_td input').change(function(){
+		var addition_name = $(this).attr('name');
+		var addition_value = $(this).val();
+
+		localStorage.setItem(addition_name, addition_value);
+	});
+}
+
+var ajax_check = false;
+function submit_form(obj){
+	if (ajax_check) {
+		return false;
+	}
+	$(obj).html('计算中，请稍候...');
+	$('div.result').html('<p>等待计算......</p>');
+
+	$('#max_comb_table').hide();
+	$('#sec_comb_table').hide();
+	$('#max_ind_comb_table').hide();
+	$('#max_bus_comb_table').hide();
+	$('#max_res_comb_table').hide();
+
+	ajax_check = true;
+	var time = new Date().getTime();
+
+	$.ajax({
+		type: "POST",
+		url: "./jiaguomeng.php?action=get_combination_data&t="+time,
+		data: $('#data_form').serialize(),
+		dataType: "json",
+		success: function(json){
+			ajax_check = false;
+			$(obj).html('计算最优组合');
+
+			if (json.error == 1) {
+				alert(json.msg);
+			}else{
+				localStorage.setItem('comb_result', JSON.stringify(json.data));
+				comb_result_show();
+			}
+
+			$('div.result').html('<p>计算完成</p>');
+		},
+		error : function (){
+			alert('可能是请求人数过多？多试几次看看/(ㄒoㄒ)/~~');
+			ajax_check = false;
+			$(obj).html('计算最优组合');
+		}
+	});
+}
+
+function comb_result_show(){
+
+	var comb_str = localStorage.getItem('comb_result');
+
+	if (!comb_str) {
+		return;
+	}
+	comb_result = JSON.parse(comb_str);
+
+	var output = '';
+	$.each(comb_result.max_comb_data, function(index, value){
+		if (index == 'final_multiple_data') {
+			$('#max_comb_table .final_multiple').html(value)
+		}else{
+			output += '<tr><td>'+index+'</td><td>'+value+'</td></tr>';
+		}
+	});
+	$('#max_comb_table tbody').html(output)
+
+	var output = '';
+	$.each(comb_result.sec_comb_data, function(index, value){
+		if (index == 'final_multiple_data') {
+			$('#sec_comb_table .final_multiple').html(value)
+		}else{
+			output += '<tr><td>'+index+'</td><td>'+value+'</td></tr>';
+		}
+	});
+	$('#sec_comb_table tbody').html(output)
+
+
+	var output = '';
+	$.each(comb_result.max_ind_comb_data, function(index, value){
+		if (index == 'final_multiple_data') {
+			$('#max_ind_comb_table .final_multiple').html(value)
+		}else if(index == 'single_house_max_data'){
+
+		}else{
+			if (value == comb_result.max_ind_comb_data['single_house_max_data']) {
+				output += '<tr style="color:red;"><td>'+index+'</td><td>'+value+'</td></tr>';
+			}else{
+				output += '<tr><td>'+index+'</td><td>'+value+'</td></tr>';
+			}
+		}
+	});
+	$('#max_ind_comb_table tbody').html(output)
+
+
+	var output = '';
+	$.each(comb_result.max_bus_comb_data, function(index, value){
+		if (index == 'final_multiple_data') {
+			$('#max_bus_comb_table .final_multiple').html(value)
+		}else if(index == 'single_house_max_data'){
+
+		}else{
+			if (value == comb_result.max_bus_comb_data['single_house_max_data']) {
+				output += '<tr style="color:red;"><td>'+index+'</td><td>'+value+'</td></tr>';
+			}else{
+				output += '<tr><td>'+index+'</td><td>'+value+'</td></tr>';
+			}
+		}
+	});
+	$('#max_bus_comb_table tbody').html(output)
+
+
+	var output = '';
+	$.each(comb_result.max_res_comb_data, function(index, value){
+		if (index == 'final_multiple_data') {
+			$('#max_res_comb_table .final_multiple').html(value)
+		}else if(index == 'single_house_max_data'){
+
+		}else{
+			if (value == comb_result.max_res_comb_data['single_house_max_data']) {
+				output += '<tr style="color:red;"><td>'+index+'</td><td>'+value+'</td></tr>';
+			}else{
+				output += '<tr><td>'+index+'</td><td>'+value+'</td></tr>';
+			}
+		}
+	});
+	$('#max_res_comb_table tbody').html(output)
+
+	$('#max_comb_table').show();
+	$('#sec_comb_table').show();
+	$('#max_ind_comb_table').show();
+	$('#max_bus_comb_table').show();
+	$('#max_res_comb_table').show();
+}
+</script>
+</body>
+</html>
