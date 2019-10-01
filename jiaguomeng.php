@@ -4,7 +4,7 @@ ini_set('display_errors','0');
 
 ini_set('memory_limit','1024M');
 
-set_time_limit(0);
+set_time_limit(0); //调整超时时间为无限制
 
 require_once dirname(__FILE__).'/init.php';
 
