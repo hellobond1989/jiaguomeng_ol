@@ -373,7 +373,7 @@ function submit_form(obj){
 			$('div.result').html('<p>计算完成</p>');
 		},
 		error : function (){
-			alert('可能是请求人数过多？多试几次看看/(ㄒoㄒ)/~~');
+			alert('计算超时了/(ㄒoㄒ)/~~');
 			ajax_check = false;
 			$(obj).html('计算最优组合');
 		}
