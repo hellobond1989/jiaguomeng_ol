@@ -38,11 +38,10 @@
 安装好以后启动软件，再将下载好的3个文件，复制到MAMP安装目录下的htdocs文件夹内
 
 比如我是这样放的：
-
- * /htdocs
-  * /JGM
-   * /init.php
-   * /index.html
-   * /jiaguomeng.php
+* /htdocs  
+    * /JGM 
+        * /JGM 
+        * /index.html 
+        * /jiaguomeng.php
      
 然后在浏览器里访问http://localhost/JGM ，没问题的话，就可以显示出来计算的页面了
