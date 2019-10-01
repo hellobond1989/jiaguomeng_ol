@@ -4,45 +4,43 @@ header("Content-Type: text/html; charset=UTF-8");
 
 session_start();
 
-$GLOBALS['buff_list'] = array(
-	$bufflist_258 = array(0.2, 0.5, 0.8, 1.1, 1.4),
-	$bufflist_246 = array(0.2, 0.4, 0.6, 0.8, 1.0),
-	$bufflist_015 = array(0.2 * 0.75, 0.5 * 0.75, 0.8 * 0.75, 1.1 * 0.75, 1.4 * 0.75),
-	$bufflist_010 = array(0.2 * 0.5, 0.5 * 0.5, 0.8 * 0.5, 1.1 * 0.5, 1.4 * 0.5),
-	$bufflist_005 = array(0.2 * 0.25, 0.5 * 0.25, 0.8 * 0.25, 1.1 * 0.25, 1.4 * 0.25),
-	$bufflist_035 = array(0.2 * 2.25, 0.5 * 2.25, 0.8 * 2.25, 1.1 * 2.25, 1.4 * 2.25),
-);
+$bufflist_258 = array(0.2, 0.5, 0.8, 1.1, 1.4);
+$bufflist_246 = array(0.2, 0.4, 0.6, 0.8, 1.0);
+$bufflist_015 = array(0.2 * 0.75, 0.4 * 0.75, 0.6 * 0.75, 0.8 * 0.75, 1.0 * 0.75);
+$bufflist_010 = array(0.2 * 0.50, 0.4 * 0.50, 0.6 * 0.50, 0.8 * 0.50, 1.0 * 0.50);
+$bufflist_005 = array(0.2 * 0.25, 0.4 * 0.25, 0.6 * 0.25, 0.8 * 0.25, 1.0 * 0.25);
+$bufflist_035 = array(0.2 * 1.75, 0.4 * 1.75, 0.6 * 1.75, 0.8 * 1.75, 1.0 * 1.75);
 
 $GLOBALS['house_buff'] = array(
 	'buffs_bus' => array(
-		'媒体之声' 	=> $bufflist_005,
-		'企鹅机械' 	=> $bufflist_015,
-		'民食斋' 	=> $bufflist_246,
-		'纺织厂' 	=> $bufflist_015,
-		'人才公寓' 	=> $bufflist_246,
-		'中式小楼' 	=> $bufflist_246,
-		'空中别墅' 	=> $bufflist_258,
-		'电厂' 		=> $bufflist_258
+	    '媒体之声'	=> $bufflist_005,
+	    '企鹅机械'	=> $bufflist_015,
+	    '民食斋'	=> $bufflist_246,
+	    '纺织厂'	=> $bufflist_015,
+	    '人才公寓'	=> $bufflist_246,
+	    '中式小楼'	=> $bufflist_246,
+	    '空中别墅'	=> $bufflist_258,
+	    '电厂'		=> $bufflist_258,
 	),
 	'buffs_ind' => array(
-		'媒体之声' 	=> $bufflist_005,
-		'钢铁厂' 	=> $bufflist_015,
-		'中式小楼' 	=> $bufflist_246,
-		'民食斋' 	=> $bufflist_246,
-		'空中别墅' 	=> $bufflist_258,
-		'电厂' 		=> $bufflist_258,
-		'企鹅机械' 	=> $bufflist_258,
-		'人才公寓' 	=> $bufflist_035
+	    '媒体之声'	=> $bufflist_005,
+	    '钢铁厂'	=> $bufflist_015,
+	    '中式小楼'	=> $bufflist_246,
+	    '民食斋'	=> $bufflist_246,
+	    '空中别墅'	=> $bufflist_258,
+	    '电厂'		=> $bufflist_258,
+	    '企鹅机械'	=> $bufflist_258,
+	    '人才公寓'	=> $bufflist_035,
 	),
 	'buffs_res' => array(
-		'媒体之声' 	=> $bufflist_005,
-		'企鹅机械' 	=> $bufflist_010,
-		'民食斋' 	=> $bufflist_246,
-		'人才公寓' 	=> $bufflist_246,
-		'平房' 		=> $bufflist_246,
-		'空中别墅' 	=> $bufflist_258,
-		'电厂' 		=> $bufflist_258,
-		'中式小楼' 	=> $bufflist_035
+	    '媒体之声'	=> $bufflist_005,
+	    '企鹅机械'	=> $bufflist_010,
+	    '民食斋'	=> $bufflist_246,
+	    '人才公寓'	=> $bufflist_246,
+	    '平房'		=> $bufflist_246,
+	    '空中别墅'	=> $bufflist_258,
+	    '电厂'		=> $bufflist_258,
+	    '中式小楼'	=> $bufflist_035,
 	),
 );
 
