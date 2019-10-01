@@ -41,7 +41,7 @@
 比如我是这样放的：
 * /htdocs  
     * /JGM 
-        * /JGM 
+        * /init.php 
         * /index.html 
         * /jiaguomeng.php
      
