@@ -5,8 +5,6 @@
 
 离线版帖子：https://bbs.nga.cn/read.php?tid=18677204
 
-在线限流地址：http://39.107.248.130:9100
-
 在线不限流地址：http://other.qikor.com/jiaguomeng/
 
 感谢NGA-根派以及其他各位提供数据和测试的同学
