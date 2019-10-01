@@ -28,10 +28,11 @@
 
 ## 简单说一下环境搭建
 
-这里给不会搭建环境的同学简单说一下方法，其实很简单。
+这里给不会搭建环境的同学简单说一下方法
 
-比如我自己在Windows上经常使用的是MAMP，这里是他们的官网：https://www.mamp.info
-下载地址页面：https://www.mamp.info/en/downloads/
+比如我自己在Windows上经常使用的是MAMP<br>
+这里是他们的官网：https://www.mamp.info<br>
+下载地址页面：https://www.mamp.info/en/downloads/<br>
 
 下载windows版本后一路安装，软件的安装方法网络上也是能查到的。
 
