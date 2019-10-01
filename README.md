@@ -36,8 +36,13 @@
 
 比如我是这样放的：
 /htdocs
+
   /JGM
+  
      /init.php
+     
      /index.html
+     
      /jiaguomeng.php
+     
 然后在浏览器里访问http://localhost/JGM ，没问题的话，就可以显示出来计算的页面了
