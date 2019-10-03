@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>家国梦</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="./style/js/jiaGuoMeng.js"></script>
+<script src="./style/js/pop_lightbox.js"></script>
+<style type="text/css">
+	body{font-size: 12px;}
+	body a{text-decoration:none;}
+
+	.quality_blue {background: #64c6ff;}
+	.quality_purple {background: #ea77ff;}
+	.quality_orange {background: #ff9900;}
+
+	table{float: left; margin: 5px;}
+	table td{padding: 0; text-align: right;}
+	table td:first-child {padding: 0 5px; }
+	table td:last-child {padding: 0 5px; }
+	table td.city_mission_td{text-align: center;}
+	table td.city_mission_td input{width: 50px; text-align: right;}
+	table td input.building_level{width: 50px; text-align: right;}
+
+	table td label {float: left; padding-right: 5px; height: 22px;}
+	table td label input {float: left; margin-top: 4px !important; *margin-top: 4px !important; _margin-top: 4px;}
+	table td label span {float: left; line-height: 21px;}
+	table td label.active{background: #fff;}
+
+	.addition_data_table td:last-child {text-align: center;}
+	.addition_data_table td:last-child input[type=text]{width: 50px; text-align: right;}
+
+	div.clear_both{clear: both;}
+
+	div.tips{color: red; margin: 10px 5px;}
+	div.calculate_container {margin: 10px 5px; height: 30px;}
+	div.calculate_container a.calculate_btn { display: block; height: 30px; padding: 0 20px; overflow: hidden; line-height: 30px; background: #0F8DF4; float: left; color: #fff; font-weight: bold; 	}
+	div.calculate_container select.calculate_type_sel{ height: 32px; border: 1px #ccc solid; list-style: 20px; padding: 5px; margin-left: 10px; float: left; }
+
+	table#calculate_archive{display: none;}
+	table#calculate_archive input{width: 100px; font-size: 12px; border-top: 0; border-bottom: 0;}
+
+	div#pop_window{display: none; width: 750px; }
+	div#pop_window .pop_window_tit{height: 40px; background: #5cb85c; overflow: hidden; padding: 0 10px; line-height: 40px; color: #fff;}
+	div#pop_window .pop_window_tit h3{font-size: 12px; color: #fff; float: left; margin: 0; padding: 0;}
+	div#pop_window .pop_window_tit a{float: right; display: inline-block; width: 30px; height: 18px; color: #fff;}
+
+	div#pop_window .pop_window_info{height: 600px; overflow-y: scroll; background: #fff;}
+	div#pop_window .pop_window_info div{width: 80%; margin: 0 auto;}
+	div#pop_window .pop_window_info div table{width: 100%;}
+</style>
+</head>
+<body>
+
+	<form method="POST" id="data_form">
+		<input type="hidden" name="calculate_type" value="1">
+		<div>
+			<table id="house_data_table_residence" cellpadding="1" cellspacing="1" border="1"></table>
+			<table id="house_data_table_business" cellpadding="1" cellspacing="1" border="1"></table>
+			<table id="house_data_table_industry" cellpadding="1" cellspacing="1" border="1"></table>
+		</div>
+		<div style="clear: both;"></div>
+		<div>
+			<table class="addition_data_table" cellpadding="1" cellspacing="1" border="1">
+				<tr>
+					<td colspan="2" style="text-align: center;">政策中心-勾选已完成阶段</td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox" data-name="multiple_policy_center" data-value="1" name="policy_center[1]" value="1"><span>第一阶段</span></label></td>
+					<td><label><input type="checkbox" data-name="multiple_policy_center" data-value="2" name="policy_center[2]" value="1"><span>第二阶段</span></label></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox" data-name="multiple_policy_center" data-value="3" name="policy_center[3]" value="1"><span>第三阶段</span></label></td>
+					<td><label><input type="checkbox" data-name="multiple_policy_center" data-value="4" name="policy_center[4]" value="1"><span>第四阶段[缺数据]</span></label></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox" data-name="multiple_policy_center" data-value="5" name="policy_center[5]" value="1"><span>第五阶段[缺数据]</span></label></td>
+					<td><label><input type="checkbox" data-name="multiple_policy_center" data-value="6" name="policy_center[6]" value="1"><span>第六阶段[缺数据]</span></label></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox" data-name="multiple_policy_center" data-value="7" name="policy_center[7]" value="1"><span>第七阶段[缺数据]</span></label></td>
+					<td><label><input type="checkbox" data-name="multiple_policy_center" data-value="8" name="policy_center[8]" value="1"><span>第八阶段[缺数据]</span></label></td>
+				</tr>
+				<tr>
+					<td><label><input type="checkbox" data-name="multiple_policy_center" data-value="9" name="policy_center[9]" value="1"><span>第九阶段[缺数据]</span></label></td>
+					<td><label><input type="checkbox" data-name="multiple_policy_center" data-value="10" name="policy_center[10]" value="1"><span>第十阶段[缺数据]</span></label></td>
+				</tr>
+			</table>
+			<table class="addition_data_table" cellpadding="1" cellspacing="1" border="1">
+				<tr><td colspan="2" style="text-align: center;">政策中心-填写未完成阶段加成</td></tr>
+				<tr><td>全部建筑收入加成</td><td><input type="text" data-name="multiple_policy_list" name="policy_data_all">%</td></tr>
+				<tr><td>住宅建筑收入加成</td><td><input type="text" data-name="multiple_policy_list" name="policy_data_res">%</td></tr>
+				<tr><td>商业建筑收入加成</td><td><input type="text" data-name="multiple_policy_list" name="policy_data_bus">%</td></tr>
+				<tr><td>工业建筑收入加成</td><td><input type="text" data-name="multiple_policy_list" name="policy_data_ind">%</td></tr>
+				<tr><td>在线-全部建筑收入加成</td><td><input type="text" data-name="multiple_policy_list" name="policy_data_all_ol">%</td></tr>
+				<tr><td>家国之光&欢度国庆</td><td><input type="text" data-name="multiple_policy_list" name="policy_data_JGZG">%</td></tr>
+				<tr style="display: none;"><td>在线-住宅建筑收入加成</td><td><input type="text" data-name="multiple_policy_list" name="policy_data_res_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-商业建筑收入加成</td><td><input type="text" data-name="multiple_policy_list" name="policy_data_bus_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-工业建筑收入加成</td><td><input type="text" data-name="multiple_policy_list" name="policy_data_ind_ol">%</td></tr>
+			</table>
+			<table class="addition_data_table" cellpadding="1" cellspacing="1" border="1">
+				<tr><td colspan="2" style="text-align: center;">相片加成</td></tr>
+				<tr><td>全部建筑收入加成</td><td><input type="text" data-name="multiple_photo_list" name="photo_data_all">%</td></tr>
+				<tr><td>住宅建筑收入加成</td><td><input type="text" data-name="multiple_photo_list" name="photo_data_res">%</td></tr>
+				<tr><td>商业建筑收入加成</td><td><input type="text" data-name="multiple_photo_list" name="photo_data_bus">%</td></tr>
+				<tr><td>工业建筑收入加成</td><td><input type="text" data-name="multiple_photo_list" name="photo_data_ind">%</td></tr>
+				<tr><td>在线-全部建筑收入加成</td><td><input type="text" data-name="multiple_photo_list" name="photo_data_all_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-住宅建筑收入加成</td><td><input type="text" data-name="multiple_photo_list" name="photo_data_res_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-商业建筑收入加成</td><td><input type="text" data-name="multiple_photo_list" name="photo_data_bus_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-工业建筑收入加成</td><td><input type="text" data-name="multiple_photo_list" name="photo_data_ind_ol">%</td></tr>
+			</table>
+			<table class="addition_data_table" cellpadding="1" cellspacing="1" border="1">
+				<tr><td colspan="2" style="text-align: center;">城市任务加成</td></tr>
+				<tr><td>全部建筑收入加成</td><td><input type="text" data-name="multiple_mission_list" name="mission_data_all">%</td></tr>
+				<tr><td>住宅建筑收入加成</td><td><input type="text" data-name="multiple_mission_list" name="mission_data_res">%</td></tr>
+				<tr><td>商业建筑收入加成</td><td><input type="text" data-name="multiple_mission_list" name="mission_data_bus">%</td></tr>
+				<tr><td>工业建筑收入加成</td><td><input type="text" data-name="multiple_mission_list" name="mission_data_ind">%</td></tr>
+				<tr><td>在线-全部建筑收入加成</td><td><input type="text" data-name="multiple_mission_list" name="mission_data_all_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-住宅建筑收入加成</td><td><input type="text" data-name="multiple_mission_list" name="mission_data_res_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-商业建筑收入加成</td><td><input type="text" data-name="multiple_mission_list" name="mission_data_bus_ol">%</td></tr>
+				<tr style="display: none;"><td>在线-工业建筑收入加成</td><td><input type="text" data-name="multiple_mission_list" name="mission_data_ind_ol">%</td></tr>
+			</table>
+		</div>
+	</form>
+
+	<div class="clear_both"></div>
+	<div class="tips">
+		<p><font style="font-weight: bolder;">下一级消耗/收益</font>：收益 = 下一级的加成后收益 - 当前加成后收益，比值越大，说明相同收益花费越多</p>
+		<!-- <p>鉴于服务器CPU性能原因，限制每次请求间隔1分钟，请见谅</p> -->
+		<p>推荐将效果差或用处不大的建筑星级设置为0，所有建筑全部计算的数据量是1728000，多选一个建筑就是指数级的计算增长</p>
+		<p>以下建筑可选，但是不计算收益：小型公寓（供货）, 复兴公馆（离线、供货）<!-- , 花园洋房（商贸中心、供货）, 加油站（人民石油、离线）, 商贸中心（花园洋房、供货）, 人民石油（加油站、离线） --></p>
+	</div>
+	<div class="clear_both"></div>
+	<div class="calculate_container">
+		<a href="javascript:;" class="calculate_btn" onclick="submit_form(this)">计算最优组合</a>
+		<select class="calculate_type_sel" name="calculate_type_sel" onchange="set_calculate_type(this);">
+			<option value="1">计算建筑加成倍率</option>
+			<option value="2">计算建筑每秒收益</option>
+		</select>
+	</div>
+
+
+	<div style="color: red; clear: left;">
+	</div>
+	<div style="clear: both;"></div>
+	<div>
+		<table cellpadding="1" cellspacing="1" border="1" style="font-size: 10px;" id="calculate_archive">
+			<thead>
+				<tr>
+					<td colspan="2">计算结果存档</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="text" name="archive_name" id="archive_name" maxlength="20" placeholder="存档名称，长度20">
+						<a href="javascript:;" onclick="save_calculate_result();">保存</a>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+			</tbody>
+		</table>
+		<table cellpadding="1" cellspacing="1" border="1" style="font-size: 10px;" id="max_comb_table">
+			<thead>
+				<tr>
+					<td colspan="4">同等级最优组合</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<a href="javascript:;" style="margin-right:50px;" onclick="pop_upgrade_line('max_comb_data')">百级内升级推荐</a>
+						<span class="final_income">&nbsp;&nbsp;</span>
+						<span>/</span>
+						<span class="final_multiple">&nbsp;&nbsp;</span>
+					</td>
+				</tr>
+				<tr>
+					<td>名称</td><td>收益</td><td>加成</td><td>下一级消耗/收益</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+			</tbody>
+		</table>
+		<table cellpadding="1" cellspacing="1" border="1" style="font-size: 10px;" id="sec_comb_table">
+			<thead>
+				<tr>
+					<td colspan="4">同等级次优组合</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<a href="javascript:;" style="margin-right:50px;" onclick="pop_upgrade_line('sec_comb_data')">百级内升级推荐</a>
+						<span class="final_income">&nbsp;&nbsp;</span>
+						<span>/</span>
+						<span class="final_multiple">&nbsp;&nbsp;</span>
+					</td>
+				</tr>
+				<tr>
+					<td>名称</td><td>收益</td><td>加成</td><td>下一级消耗/收益</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+			</tbody>
+		</table>
+		<table cellpadding="1" cellspacing="1" border="1" style="font-size: 10px;" id="max_ind_comb_table">
+			<thead>
+				<tr>
+					<td colspan="4">不同级单体最大【工业】</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<a href="javascript:;" style="margin-right:50px;" onclick="pop_upgrade_line('max_ind_comb_data')">百级内升级推荐</a>
+						<span class="final_income">&nbsp;&nbsp;</span>
+						<span>/</span>
+						<span class="final_multiple">&nbsp;&nbsp;</span>
+					</td>
+				</tr>
+				<tr>
+					<td>名称</td><td>收益</td><td>加成</td><td>下一级消耗/收益</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+			</tbody>
+		</table>
+		<table cellpadding="1" cellspacing="1" border="1" style="font-size: 10px;" id="max_bus_comb_table">
+			<thead>
+				<tr>
+					<td colspan="4">不同级单体最大【商业】</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<a href="javascript:;" style="margin-right:50px;" onclick="pop_upgrade_line('max_bus_comb_data')">百级内升级推荐</a>
+						<span class="final_income">&nbsp;&nbsp;</span>
+						<span>/</span>
+						<span class="final_multiple">&nbsp;&nbsp;</span>
+					</td>
+				</tr>
+				<tr>
+					<td>名称</td><td>收益</td><td>加成</td><td>下一级消耗/收益</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+			</tbody>
+		</table>
+		<table cellpadding="1" cellspacing="1" border="1" style="font-size: 10px;" id="max_res_comb_table">
+			<thead>
+				<tr>
+					<td colspan="4">不同级单体最大【住宅】</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<a href="javascript:;" style="margin-right:50px;" onclick="pop_upgrade_line('max_res_comb_data')">百级内升级推荐</a>
+						<span class="final_income">&nbsp;&nbsp;</span>
+						<span>/</span>
+						<span class="final_multiple">&nbsp;&nbsp;</span>
+					</td>
+				</tr>
+				<tr>
+					<td>名称</td><td>收益</td><td>加成</td><td>下一级消耗/收益</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+				<tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
+			</tbody>
+		</table>
+	</div>
+	<div style="clear: both;"></div>
+	<div>
+		备注：<br/>
+		* 公式来源：<a href="https://bbs.nga.cn/read.php?tid=18675554" target="_blank">https://bbs.nga.cn/read.php?tid=18675554</a><br/>
+		* 加成来源：<a href="https://bbs.nga.cn/read.php?tid=18677204" target="_blank">https://bbs.nga.cn/read.php?tid=18677204</a><br/>
+		* 收益来源：<a href="https://bbs.nga.cn/read.php?tid=18741305" target="_blank">https://bbs.nga.cn/read.php?tid=18741305</a><br/>
+	</div>
+
+
+	<div class="pop_window" id="pop_window">
+		<div class="pop_window_tit">
+	    	<h3>推荐升级路线：</h3>
+	        <a href="javascript:void('0');" onclick="WinPop.Close('pop_window')">关闭</a>
+	    </div>
+	    <div class="pop_window_info">
+	    	<div>
+		    	<table>
+		    		<thead>
+		    			<tr>
+		    				<td>序号</td>
+		    				<td>建筑</td>
+		    				<td>下一等级</td>
+		    				<td>下一级消耗/收益</td>
+		    			</tr>
+		    		</thead>
+		    		<tbody></tbody>
+		    	</table>
+	    	</div>
+	    </div>
+	</div>
+</body>
+</html>
